@@ -1,109 +1,102 @@
-﻿using Learning_to_develop_a_console_app;
+﻿using Console_Calculator;
+using Console_Calculator.Core;
 using System.Runtime.Intrinsics.Arm;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Welcome to the calculator app!");
+        decimal number1;
+        decimal number2;
+        char operatorChar;
+        bool proceed = true;
 
-        bool runAgain = true;
-        while (runAgain)
+        while (proceed)
         {
-            decimal number1;
-            bool validInput1 = false;
+            number1 = inputHandling("Enter first number");
+            number2 = inputHandling("Enter second number");
 
             do
             {
-                Console.WriteLine("Fill in the first number (max 2 numbers after the decimal): ");
-                string input1 = Console.ReadLine();
+                Console.WriteLine("Choose one of the following operators: +, -, /, *");
+                string operatorInput = Console.ReadLine();
 
-                if (decimal.TryParse(input1, out number1))
+                if (operatorInput.Length == 1)
                 {
-                    if (decimal.Round(number1, 2) == number1)
-                    {
-                        validInput1 = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please enter a number with a maximum of 2 decimal numbers.");
-                    }
+                    operatorChar = Convert.ToChar(operatorInput);
+                    break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine("Invalid operator. Please enter a valid operator");
                 }
-            } while (!validInput1);
+            } while (true);
 
-            decimal number2;
-            bool validInput2 = false;
-
-            do
+            CalculateService calculator = new CalculateService();
+            var calculationResult = calculator.PerformCalculation(number1, number2, operatorChar);
+            if (!calculationResult.Succeeded)
             {
-                Console.WriteLine("Fill in the second number (max 2 numbers after the decimal): ");
-                string input2 = Console.ReadLine();
-
-                if (decimal.TryParse(input2, out number2))
-                {
-                    if (decimal.Round(number2, 2) == number2)
-                    {
-                        validInput2 = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please enter a number with a maximum of 2 decimal numbers.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
-                }
-            } while (!validInput2);
-
-            char oper;
-            bool validInput3 = false;
-            do
-            {
-                Console.WriteLine("Choose an operator (+, -, *, /): ");
-                string input3 = (Console.ReadLine());
-
-                if (char.TryParse(input3, out oper))
-                {
-                    if (oper == '+' || oper == '-' || oper == '*' || oper == '/')
-                    {
-                        validInput3 = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please enter a valid operator");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid operator");
-                }
-
-            } while (!validInput3);
-
-            if (oper == '/' && number2 == 0)
-            {
-                Console.WriteLine("Division by zero is not allowed.");
+                Console.Write(calculationResult.ErrorMessage);
             }
             else
             {
-                Calculator calculator = new Calculator();
-                decimal result = calculator.Calculation(number1, number2, oper);
-
-                Console.WriteLine($"Result: {result}");
+                Console.WriteLine("Result: " + calculationResult.Result);
             }
-            
 
-            Console.WriteLine("Press Enter to calculate something again, or 'N' to exit: ");
-            string choice = Console.ReadLine();
-            if(choice.ToLower() == "n")
+            Console.WriteLine("To continue, type 'yes' or 'y' or 'no' or 'n' to stop: ");
+            string confirmation = Console.ReadLine().ToLower();
+
+            if (confirmation == "yes" || confirmation == "y")
             {
-                runAgain = false;
+                proceed = true;
             }
+            else if (confirmation == "no" || confirmation == "n")
+            {
+                proceed = false;
+                Console.WriteLine("Calculator closed. Have a nice day!");
+                Thread.Sleep(2000);
+            } else
+            {
+                Console.WriteLine("Invalid input, Stopping program.");
+                Thread.Sleep(2000);
+                Environment.Exit(0);
+            }
+        }
+    }
+
+    private static decimal inputHandling(string prompt)
+    {
+        do
+        {
+            decimal inputValue;
+
+            Console.WriteLine(prompt);
+            string inputUser = Console.ReadLine();
+            int decimalLength = inputUser.IndexOfAny(new char[] { '.', ',' });
+
+            if (string.IsNullOrEmpty(inputUser))
+            {
+                Console.WriteLine("You need to fill in a number.");
+            }
+            else
+            {
+                if (decimal.TryParse(inputUser, out inputValue))
+                {
+                    if (decimalLength != -1 && inputUser.Substring(decimalLength + 1).Length > 2)
+                    {
+                        Console.WriteLine("Can only have 2 decimals behind the '.' or ','");
+                    }
+
+                    return inputValue;
+                }
+                else
+                {
+                    Console.WriteLine("Input needs to be a valid number.");
+                }
+            }
+        } while (true);
+
+    {
         }
     }
 }

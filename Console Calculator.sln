@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning to develop a console app", "Learning to develop a console app\Learning to develop a console app.csproj", "{984815AF-CF85-4C33-AD14-CA33DBCD7E0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console Calculator", "Learning to develop a console app\Console Calculator.csproj", "{984815AF-CF85-4C33-AD14-CA33DBCD7E0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rengel\\source\\repos\\Learning to develop a console app\\Learning to develop a console app\\Learning to develop a console app.csproj",
-      "projectName": "Learning to develop a console app",
-      "projectPath": "C:\\Users\\rengel\\source\\repos\\Learning to develop a console app\\Learning to develop a console app\\Learning to develop a console app.csproj",
+      "projectUniqueName": "C:\\Users\\rengel\\source\\repos\\Learning to develop a console app\\Learning to develop a console app\\Console Calculator.csproj",
+      "projectName": "Console Calculator",
+      "projectPath": "C:\\Users\\rengel\\source\\repos\\Learning to develop a console app\\Learning to develop a console app\\Console Calculator.csproj",
       "packagesPath": "C:\\Users\\rengel\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\rengel\\source\\repos\\Learning to develop a console app\\Learning to develop a console app\\obj\\",
       "projectStyle": "PackageReference",
