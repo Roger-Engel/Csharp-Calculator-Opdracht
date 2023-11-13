@@ -84,7 +84,7 @@ class Program
                 {
                     if (decimalLength != -1 && inputUser.Substring(decimalLength + 1).Length > 2)
                     {
-                        Console.WriteLine("Can only have 2 decimals behind the '.' or ','");
+                        Console.WriteLine("You can only have 2 decimals behind your number.");
                     }
 
                     return inputValue;
